@@ -40,7 +40,7 @@ func _ready() -> void:
                 var position := Vector3i(x,-depth,z)
                 if is_cave(position):
                     continue
-                var ore_seed := abs(x*92821 + z*68917 + depth*17389 + x*z*2137) % 113
+                var ore_seed: int = absi(x * 92821 + z * 68917 + depth * 17389 + x * z * 2137) % 113
                 var block_type := STONE
                 if depth < 4:
                     block_type = SOIL
@@ -110,7 +110,7 @@ func rebuild_chunk(key: Vector3i) -> void:
                         continue
                     var start := vertices.size()
                     var base_color := block_color(block_type)
-                    var variation := 0.84+float(abs(position.x*31+position.y*47+position.z*71)%17)/100.0
+                    var variation := 0.84+float(absi(position.x * 31 + position.y * 47 + position.z * 71) % 17)/100.0
                     if face == 2:
                         variation *= 1.16
                     if face == 3:

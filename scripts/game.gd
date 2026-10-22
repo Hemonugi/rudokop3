@@ -7,7 +7,7 @@ const WormScript = preload("res://scripts/worm.gd")
 const ChestScript = preload("res://scripts/chest.gd")
 
 var terrain: MineTerrain
-var player: CharacterBody3D
+var player: MinePlayer
 var message_label: Label
 var hud_label: Label
 var hint_label: Label
@@ -58,11 +58,11 @@ func create_environment() -> void:
 func create_surface() -> void:
     for x in range(-14,15,4):
         for z in range(-14,15,4):
-            if abs(x) < 4 and abs(z) < 4:
+            if absi(x) < 4 and absi(z) < 4:
                 continue
             var pebble := MeshInstance3D.new()
             var mesh := SphereMesh.new()
-            mesh.radius = 0.2+float(abs(x*z+x)%4)*0.08
+            mesh.radius = 0.2+float(absi(x*z+x)%4)*0.08
             mesh.height = 0.25
             pebble.mesh = mesh
             pebble.material_override = make_material(Color("c4baa0"))

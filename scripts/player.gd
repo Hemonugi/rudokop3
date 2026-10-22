@@ -1,4 +1,5 @@
 extends CharacterBody3D
+class_name MinePlayer
 
 # Управление от первого лица и удар киркой. Руки, ноги и инструмент — 3D-модели.
 const WALK_SPEED := 5.0
@@ -8,7 +9,7 @@ const GRAVITY := 18.0
 const REACH := 4.6
 const ATTACK_INTERVAL := 0.28
 
-var game: Node3D
+var game
 var terrain: MineTerrain
 var camera: Camera3D
 var view_model: Node3D
@@ -107,9 +108,11 @@ func use_pickaxe() -> void:
     if collider is StaticBody3D and collider.has_meta("chest"):
         game.notify("Нажми E, чтобы открыть сундук")
     elif collider.has_method("receive_damage"):
-        collider.receive_damage(1)
+        collider.call("receive_damage", 1)
     elif collider is StaticBody3D and collider.get_parent() == terrain:
-        var block_position := Vector3i((target.position-target.normal*0.06).round())
+        var hit_position: Vector3 = target["position"]
+        var hit_normal: Vector3 = target["normal"]
+        var block_position: Vector3i = Vector3i((hit_position - hit_normal * 0.06).round())
         terrain.excavate(block_position)
 
 func interact() -> void:

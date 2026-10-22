@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 # Враг чувствует персонажа поблизости, ползёт к нему и кусает.
 var target: CharacterBody3D
-var game: Node3D
+var game
 var hit_points := 3
 var cooldown := 0.0
 var animation_time := 0.0

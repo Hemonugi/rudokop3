@@ -1,7 +1,7 @@
 extends Node3D
 
 # Награда за сундук выдаётся только при первом открытии.
-var game: Node3D
+var game
 var reward := 0
 var opened := false
 var lid: MeshInstance3D
